@@ -1,10 +1,17 @@
 class V1::GreetingsController < ApplicationController
   def index
-    render json: { greetings: [
+    # @greetings = Greeting.all
+    # render json: @greetings, status: :ok
+    # puts @greetings
+    render json: { :greetings => [
       {
-      name: 'Hello',
-      guid: '0415674d-a0e8-4748-af68-a5f53a05c453'
-    }
+        greeting: "Bonjour",
+        id: 1
+      },
+      {
+        greeting: "Hello",
+        id: 2
+      }
     ] }.to_json
   end
 end

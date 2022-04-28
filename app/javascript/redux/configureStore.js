@@ -1,11 +1,14 @@
-import { createStore, applyMiddleware } from 'redux';
+import { legacy_createStore as createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { GET_GREETINGS_SUCCESS } from '../components/HelloWorld';
 const initialState = {
   greetings: [
     {
-      name: 'test',
-      guid: '123',
+      greeting: '1',
+    },
+    {
+      greeting: '2',
     },
   ],
 };
@@ -13,8 +16,8 @@ const initialState = {
 function rootReducer(state, action) {
   console.log(action.type);
   switch (action.type) {
-    case 'GET_GREETINGS_SUCCESS':
-      return { greetings: action.json.greetings };
+    case GET_GREETINGS_SUCCESS:
+      return { greetings: action.json };
   }
   return state;
 }

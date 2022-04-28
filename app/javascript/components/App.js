@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import HelloWorld from './HelloWorld';
-import configureStore from '../configureStore';
+import configureStore from '../redux/configureStore';
 const store = configureStore();
+console.log(store, 'this is store')
 class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
-            <Route exact path="/" element={'Home!'} />
-            <Route path="/hello" element={<HelloWorld greeting="friend" />} />
+            <Route path="/" element={<HelloWorld />} />
           </Routes>
         </BrowserRouter>
       </Provider>

@@ -1,21 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import PropTypes from 'prop-types';
 const GET_GREETINGS_REQUEST = 'GET_GREETINGS_REQUEST';
-const GET_GREETINGS_SUCCESS = 'GET_GREETINGS_SUCCESS';
-
-function getGreetings() {
-  console.log('getgreetings() Action!');
-  return (dispatch) => {
-    dispatch({ type: GET_GREETINGS_REQUEST });
-
-    return fetch(`v1/greetings.json`)
-      .then((response) => response.json())
-      .then((json) => dispatch(getGreetingsSuccess(json)))
-      .catch((error) => console.log(`Fetching Error ${error}`));
-  };
-}
+export const GET_GREETINGS_SUCCESS = 'GET_GREETINGS_SUCCESS';
 
 export function getGreetingsSuccess(json) {
   return {
@@ -23,19 +10,34 @@ export function getGreetingsSuccess(json) {
     json,
   };
 }
+
+function getGreetings() {
+  console.log('getgreetings() Action!');
+  return (dispatch) => {
+    dispatch({ type: GET_GREETINGS_REQUEST });
+
+    return fetch(`v1/greetings.json`)
+      .then((response) => {
+        console.log(response.status);
+        console.log(response.body);
+        response.json();
+      })
+      .then((json) => dispatch(getGreetingsSuccess(json)))
+      .catch((error) => console.log(`Fetching Error ${error}`));
+  };
+}
 class HelloWorld extends React.Component {
   render() {
     const { greetings } = this.props;
-    const greetingList = greetings.map((greeting) => {
-      return (
-        <li key={greeting.guid}>
-          {greeting.name} {greeting.guid}
-        </li>
-      );
-    });
+    console.log(greetings, 'this are greetings');
+    // const greetingList = greetings.map((greeting) => {
+    //   return <li key={greeting.greeting}>{greeting.greeting}</li>;
+    // });
+    const randomGreeting =
+      greetings[Math.floor(Math.random() * greetings.length)];
     return (
       <React.Fragment>
-        Greeting: {this.props.greeting}
+        Greeting: <p>{randomGreeting.greeting}</p>
         <button
           className="getGreetingsbtn"
           onClick={() => this.props.getGreetings()}
@@ -43,15 +45,11 @@ class HelloWorld extends React.Component {
           getGreetings
         </button>
         <br />
-        <ul>{greetingList} </ul>
+        {/* <ul>{greetingList} </ul> */}
       </React.Fragment>
     );
   }
 }
-
-HelloWorld.propTypes = {
-  greeting: PropTypes.string,
-};
 
 const structuredSelector = createStructuredSelector({
   greetings: (state) => state.greetings,
