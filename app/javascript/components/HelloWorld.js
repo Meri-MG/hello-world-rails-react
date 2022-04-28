@@ -26,13 +26,9 @@ export function getGreetingsSuccess(json) {
 class HelloWorld extends React.Component {
   render() {
     const { greetings } = this.props;
-    const greetingList = greetings.map((greeting) => {
-      return (
-        <li key={greeting.guid}>
-          {greeting.name} {greeting.guid}
-        </li>
-      );
-    });
+    const randomGreeting =
+      greetings[Math.floor(Math.random() * greetings.length)];
+  
     return (
       <React.Fragment>
         Greeting: {this.props.greeting}
@@ -43,7 +39,7 @@ class HelloWorld extends React.Component {
           getGreetings
         </button>
         <br />
-        <ul>{greetingList} </ul>
+        <p>{randomGreeting.name} </p>
       </React.Fragment>
     );
   }
