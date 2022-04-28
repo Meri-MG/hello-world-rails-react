@@ -28,18 +28,20 @@ class HelloWorld extends React.Component {
     const { greetings } = this.props;
     const randomGreeting =
       greetings[Math.floor(Math.random() * greetings.length)];
-  
+
     return (
       <React.Fragment>
-        Greeting: {this.props.greeting}
-        <button
-          className="getGreetingsbtn"
-          onClick={() => this.props.getGreetings()}
-        >
-          getGreetings
-        </button>
-        <br />
-        <p>{randomGreeting.name} </p>
+        <div className="container">
+        <p>Hey, {this.props.greeting}</p>
+          <button
+            className="getGreetingsbtn"
+            onClick={() => this.props.getGreetings()}
+          >
+            Click me
+          </button>
+          <br />
+          <p>{randomGreeting.name} </p>
+        </div>
       </React.Fragment>
     );
   }

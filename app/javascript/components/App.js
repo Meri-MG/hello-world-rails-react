@@ -11,8 +11,7 @@ class App extends React.Component {
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
-            <Route exact path="/" element={'Home!'} />
-            <Route path="/hello" element={<HelloWorld greeting="friend" />} />
+            <Route exact path="/" element={<HelloWorld greeting="friend" />} />
           </Routes>
         </BrowserRouter>
       </Provider>

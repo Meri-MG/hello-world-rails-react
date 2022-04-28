@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 const initialState = {
   greetings: [
     {
-      name: 'test',
+      name: 'Hi',
       guid: '123',
     },
   ],
