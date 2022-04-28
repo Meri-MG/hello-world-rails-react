@@ -37,7 +37,6 @@
 
 Please run the following commands `rails db:create` `rails db:migrate` `rails s`
 
-```
 ### To track linter errors locally follow these steps:  
 
 Track linter errors run:
